@@ -102,26 +102,6 @@ my $max_number_of_jobs_allowed_in_queue = 400;
 #
 my $LAST_KNOWN_NUMBER_OF_JOBS_IN_JOB_ARRAY = undef;
 
-# Hack to save having to find this every time a new command has been 
-# generated.
-#
-# Finding this number involves running ls on a directory that can be large,
-# so hopefully caching this information speeds up command generation.
-#
-# We must remember to update this when starting a new job array file.
-#
-#my $LAST_KNOWN_ARRAY_NUMBER_USED = undef;
-#
-# End of Global variables used in the module
-
-sub DESTROY {
-
-#   print "\n------------------------------------------------\n";
-#   print "\n Destroy method called! \n";
-#   print "\n------------------------------------------------\n";
-
-}
-
 sub qsub {
     my ( $self, $qsub_line ) = @_;
 
@@ -302,13 +282,6 @@ sub fetch_job_ids_in_queue {
     #
     $existing_ids{ $current_job_id_field } = $current_status;
       
-#     my $job_id_found = $current_job_id_field =~ /^(.+)\./;    
-#     if ( $job_id_found ) {
-#       $existing_ids{ $1 } = 1;
-#       #$existing_ids{ $current_job_id_field } = 1;
-#     } else {
-#       next LINE;
-#     }
   }
   return \%existing_ids;
 }
@@ -588,7 +561,6 @@ QSUB_FILE
   if ($number_of_jobs_in_current_job_array>=$max_number_of_jobs_in_current_job_array) {
     
     if ($run_job_arrays_when_ready) {
-      #$self->_submit_job_array($self->_get_current_array_directory_name);
       $self->_submit_job_array($current_job_array_dir);
     }
   }
@@ -619,7 +591,6 @@ sub _submit_job_array {
   $self->_save_as_job_array_directory_submitted($array_dir);
   $self->_increment_job_array_number();
     
-  #my $stdout = System::ShellRunner::run_cmd($qsub_file);
   # 1182030[].paroo3
   # Warning : Job array will run for 0 days.
   #
@@ -632,7 +603,6 @@ sub _submit_job_array {
 
     chomp($stdout);
 
-    #my $job_array_id = $1;
     my $job_array_id = $stdout;
     $self->id($job_array_id);
     
@@ -950,6 +920,5 @@ sub is_queue_overloaded {
   
   return $is_queue_overloaded;
 }
-
 
 1;
