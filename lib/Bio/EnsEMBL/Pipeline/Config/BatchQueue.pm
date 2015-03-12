@@ -341,12 +341,12 @@ chomp($default_perl);
 
       # Most RepeatMasker jobs need not more than 500MB.
       #resource => 'select[mem>500] rusage[mem=500]',
-      resource => 'mem=500M:ncpus=1:NODETYPE=any:select=1',
+      resource => 'mem=500M:ncpus=1:NODETYPE=large:select=1',
       sub_args => '-A '. &default_group .' -l walltime=168:0:0',
 
       # Some jobs might fail (unlikely with 1M slices), but they will
       # defintely pass with 2GB.
-      retry_resource => 'mem=500M:ncpus=1:NODETYPE=any:select=1',
+      retry_resource => 'mem=500M:ncpus=1:NODETYPE=large:select=1',
       retry_sub_args => '-A '. &default_group .' -l walltime=168:0:0',
 
       retry_queue      => '',
@@ -378,7 +378,7 @@ chomp($default_perl);
 
       # Some jobs might fail (unlikely with 1M slices), but they will
       # defintely pass with 2GB.
-      #retry_resource => 'mem=500M:ncpus=1:NODETYPE=any:select=1',
+      #retry_resource => 'mem=500M:ncpus=1:NODETYPE=large:select=1',
       # Pmatch seems to be using a lot of memory, so if it fails, it might be due to insufficient memory.
       retry_sub_args => '-A '. &default_group .' -l select=1:ncpus=1:mem=4g:NodeType=medium -l walltime=168:0:0',
 
@@ -390,8 +390,8 @@ chomp($default_perl);
       batch_size       => 800,      # uniprot takes a long itme
       retry_batch_size => 800,
       #sub_args         => '-A '. &default_group .' -l select=1:ncpus=3:mem=1g:NodeType=medium -l walltime=4:0:0',
-      sub_args         => '-A '. &default_group .' -l select=1:ncpus=3:mem=50g:NodeType=any -l walltime=168:0:0',
-      retry_sub_args   => '-A '. &default_group .' -l select=1:ncpus=3:mem=50g:NodeType=any -l walltime=168:0:0',
+      sub_args         => '-A '. &default_group .' -l select=1:ncpus=3:mem=50g:NODETYPE=large -l walltime=168:0:0',
+      retry_sub_args   => '-A '. &default_group .' -l select=1:ncpus=3:mem=50g:NODETYPE=large -l walltime=168:0:0',
       
       #resource       => 'rusage[myens_build1tok=25]  span[hosts=1]',
       #sub_args       => '-n 3',
@@ -405,15 +405,15 @@ chomp($default_perl);
       batch_size     => 500, # generally we use the default for this which is 120.
       retry_batch_size => 500,
       #resource       => 'rusage[myens_build1tok=10]',
-      sub_args         => '-A '. &default_group .' -l select=1:ncpus=3:mem=4g:NodeType=any -l walltime=48:0:0',
-      retry_sub_args   => '-A '. &default_group .' -l select=1:ncpus=3:mem=8g:NodeType=any -l walltime=168:0:0',
+      sub_args         => '-A '. &default_group .' -l select=1:ncpus=3:mem=4g:NODETYPE=large -l walltime=48:0:0',
+      retry_sub_args   => '-A '. &default_group .' -l select=1:ncpus=3:mem=8g:NODETYPE=large -l walltime=168:0:0',
       #memory         => ['300MB','1GB','3GB'],
     },
     {
       logic_name => 'trnascan',
       batch_size => 2000,
       resource   => 'rusage[myens_build1tok=10]',
-      resource   => 'mem=500M:ncpus=1:NODETYPE=any:select=1',
+      resource   => 'mem=500M:ncpus=1:NODETYPE=large:select=1',
       #memory     => ['200MB', '1GB'],
       queue      => 'workq',
     },
