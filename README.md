@@ -65,7 +65,7 @@ After running rulemanager
 
 This is a step you have to run in addition to how rulemanager is described in Ensembl's documentation.
 
-PBS on Barrine requires that jobs are submitted as job arrays, because the job schedular can't handle large amount of jobs. Therefore this adaptation of the genebuild pipeline creates job arrays. Once enough jobs have been collected for an array, it is submitted to PBS. At the end of a run of rulemanager there may be job arrays left over that have not been submitted yet, because there weren't enough jobs to fill it up. These jobs can be submitted like this:
+PBS on Barrine requires that jobs are submitted as job arrays, because the job scheduler can't handle large amount of jobs. Therefore this adaptation of the genebuild pipeline creates job arrays. Once enough jobs have been collected for an array, it is submitted to PBS. At the end of a run of rulemanager there may be job arrays left over that have not been submitted yet, because there weren't enough jobs to fill it up. These jobs can be submitted like this:
 
 ```bash
 submit_open_job_arrays.pl
